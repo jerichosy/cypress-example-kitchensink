@@ -49,18 +49,34 @@ describe('todomvc app', () => {
     // assert all
     cy.get('.todo-list li')
       .should('have.length', 3)
+    cy.contains('Pay electric bill').should('exist')
+    cy.contains('Walk the dog').should('exist')
+    cy.contains('Feed the cat').should('exist')
 
     cy.contains('Active').click()
+    // assert active
     cy.get('.todo-list li')
       .should('have.length', 2)
+    cy.contains('Pay electric bill').should('exist')
+    cy.contains('Walk the dog').should('not.exist')
+    cy.contains('Feed the cat').should('exist')
+
 
     cy.contains('Completed').click()
+    // assert completed
     cy.get('.todo-list li')
       .should('have.length', 1)
+    cy.contains('Pay electric bill').should('not.exist')
+    cy.contains('Walk the dog').should('exist')
+    cy.contains('Feed the cat').should('not.exist')
 
     cy.contains('All').click()
+    // assert all again
     cy.get('.todo-list li')
       .should('have.length', 3)
+    cy.contains('Pay electric bill').should('exist')
+    cy.contains('Walk the dog').should('exist')
+    cy.contains('Feed the cat').should('exist')
   })
 
   it('clear completed', () => {
