@@ -195,4 +195,26 @@ describe('todomvc app', () => {
         .should('have.class', 'completed')
     })
   })
+
+  it('validate check all issue is due to duplicating default IDs', () => {
+    cy.deleteAll()
+    cy.seed()
+
+    cy.get('[data-test=new-todo]').type(`Feed the cat{enter}`)
+
+    const todoItems = ['Pay electric bill', 'Walk the dog', 'Feed the cat']
+
+    todoItems.forEach(todoItem => {
+      cy.contains(todoItem)
+        .parent()
+        .find('input[type=checkbox]')
+        .check()
+    })
+
+    todoItems.forEach(todoItem => {
+      cy.contains(todoItem)
+        .parents('li')
+        .should('have.class', 'completed')
+    })
+  })
 })
