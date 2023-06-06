@@ -170,8 +170,8 @@ describe('todomvc app', () => {
 
     todoItems.forEach(todoItem => {
       cy.contains(todoItem)
-      .parents('li')
-      .should('have.class', 'completed')
+        .parents('li')
+        .should('have.class', 'completed')
     })
   })
 })
