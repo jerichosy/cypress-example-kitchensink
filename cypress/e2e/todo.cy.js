@@ -1,6 +1,8 @@
 describe('todomvc app', () => {
   beforeEach(() => {
     cy.visit('http://localhost:8080/todo')
+    cy.get('[data-test=new-todo]').type(`Pay electric bill{enter}`)
+    cy.get('[data-test=new-todo]').type(`Walk the dog{enter}`)
   })
 
   it('can add new todo items', () => {

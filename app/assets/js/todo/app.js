@@ -28,12 +28,12 @@
     setView()
 
     // initialize with 2 items
-    todo.storage.findAll((data) => {
-      if (!data.length) {
-        todo.controller.addItem('Pay electric bill')
-        todo.controller.addItem('Walk the dog')
-      }
-    })
+    // todo.storage.findAll((data) => {
+    //   if (!data.length) {
+    //     todo.controller.addItem('Pay electric bill')
+    //     todo.controller.addItem('Walk the dog')
+    //   }
+    // })
   }
 
   function setView () {
