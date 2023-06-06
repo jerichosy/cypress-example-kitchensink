@@ -15,4 +15,17 @@ describe('todomvc app', () => {
       .last()
       .should('have.text', newItem)
   })
+
+  it('can check off an item as completed', () => {
+    const itemToCheckOff = 'Walk the dog'
+    cy.contains(itemToCheckOff)
+      .parent()
+      .find('input[type=checkbox]')
+      .check()
+
+    // assert
+    cy.contains(itemToCheckOff)
+      .parents('li')
+      .should('have.class', 'completed')
+  })
 })
