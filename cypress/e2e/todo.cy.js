@@ -156,6 +156,27 @@ describe('todomvc app', () => {
     cy.contains('Walk the dog').should('not.exist')
   })
 
+  it('validate clear completed issue is due to duplicating default IDs', () => {
+    cy.deleteAll()
+    cy.seed()
+
+    const newItem = 'Feed the cat'
+    cy.get('[data-test=new-todo]').type(`${newItem}{enter}`)
+
+    cy.contains('Walk the dog')
+      .parent()
+      .find('input[type=checkbox]')
+      .check()
+
+    cy.contains('Clear completed').click()
+
+    // assert
+    cy.get('.todo-list li')
+      .should('have.length', 2)
+
+    cy.contains('Walk the dog').should('not.exist')
+  })
+
   it('check all', () => {
     cy.get('[data-test=new-todo]').type(`Feed the cat{enter}`)
 
