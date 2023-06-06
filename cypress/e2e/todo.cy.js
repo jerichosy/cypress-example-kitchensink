@@ -94,4 +94,23 @@ describe('todomvc app', () => {
 
     cy.contains('Walk the dog').should('not.exist')
   })
+
+  it('check all', () => {
+    cy.get('[data-test=new-todo]').type(`Feed the cat{enter}`)
+
+    const todoItems = ['Pay electric bill', 'Walk the dog', 'Feed the cat']
+
+    todoItems.forEach(todoItem => {
+      cy.contains(todoItem)
+        .parent()
+        .find('input[type=checkbox]')
+        .check()
+    })
+
+    todoItems.forEach(todoItem => {
+      cy.contains(todoItem)
+      .parents('li')
+      .should('have.class', 'completed')
+    })
+  })
 })
