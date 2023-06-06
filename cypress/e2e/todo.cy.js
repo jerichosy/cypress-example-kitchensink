@@ -11,7 +11,6 @@ describe('todomvc app', () => {
 
     // assert
     cy.get('.todo-list li')
-      .should('have.length', 3)
       .last()
       .should('have.text', newItem)
   })
@@ -27,5 +26,14 @@ describe('todomvc app', () => {
     cy.contains(itemToCheckOff)
       .parents('li')
       .should('have.class', 'completed')
+  })
+
+  it('assert 3 items', () => {
+    const newItem = 'Feed the cat'
+    cy.get('[data-test=new-todo]').type(`${newItem}{enter}`)
+
+    // assert
+    cy.get('.todo-list li')
+      .should('have.length', 3)
   })
 })
