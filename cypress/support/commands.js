@@ -23,3 +23,17 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('seed', () => {
+  const todoItems = ['Pay electric bill', 'Walk the dog', 'Feed the cat']
+
+  todoItems.forEach(todoItem => {
+    cy.get('[data-test=new-todo]').type(`${todoItem}{enter}`)
+  })
+})
+
+Cypress.Commands.add('deleteAll', () => {
+  cy.get('.todo-list li').each(($el) => {
+    cy.wrap($el).find('.destroy').click({ force: true })
+  })
+})

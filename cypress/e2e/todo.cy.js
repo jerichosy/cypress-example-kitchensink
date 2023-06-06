@@ -26,6 +26,22 @@ describe('todomvc app', () => {
       .should('have.class', 'completed')
   })
 
+  it('validate check off issue is due to duplicating default IDs', () => {
+    cy.deleteAll()
+    cy.seed()
+
+    const itemToCheckOff = 'Walk the dog'
+    cy.contains(itemToCheckOff)
+      .parent()
+      .find('input[type=checkbox]')
+      .check()
+
+    // assert
+    cy.contains(itemToCheckOff)
+      .parents('li')
+      .should('have.class', 'completed')
+  })
+
   it('assert 3 items', () => {
     const newItem = 'Feed the cat'
     cy.get('[data-test=new-todo]').type(`${newItem}{enter}`)
