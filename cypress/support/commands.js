@@ -25,7 +25,7 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 Cypress.Commands.add('seed', () => {
-  const todoItems = ['Pay electric bill', 'Walk the dog', 'Feed the cat']
+  const todoItems = ['Pay electric bill', 'Walk the dog']
 
   todoItems.forEach(todoItem => {
     cy.get('[data-test=new-todo]').type(`${todoItem}{enter}`)
