@@ -62,4 +62,22 @@ describe('todomvc app', () => {
     cy.get('.todo-list li')
       .should('have.length', 3)
   })
+
+  it('clear completed', () => {
+    const newItem = 'Feed the cat'
+    cy.get('[data-test=new-todo]').type(`${newItem}{enter}`)
+
+    cy.contains('Walk the dog')
+      .parent()
+      .find('input[type=checkbox]')
+      .check()
+
+    cy.contains('Clear completed').click()
+
+    // assert
+    cy.get('.todo-list li')
+      .should('have.length', 2)
+
+    cy.contains('Walk the dog').should('not.exist')
+  })
 })
